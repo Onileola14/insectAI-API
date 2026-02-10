@@ -1,10 +1,11 @@
 const identifyInsect = require("../services/aiService");
-const  getInsectDetails = require("../services/insectService");
+const getInsectDetails = require("../services/insectService");
 const uploadImage = require("../services/uploadService");
+const { StatusCodes } = require("http-status-codes");
 
 const identify = async (req, res) => {
   if (!req.files || !req.files.image) {
-    return res.status(400).json({
+    return res.status(StatusCodes.BAD_REQUEST).json({
       message: "Please upload an image",
     });
   }
@@ -25,6 +26,4 @@ const identify = async (req, res) => {
   });
 };
 
-
-
-module.exports = identify
+module.exports = identify;

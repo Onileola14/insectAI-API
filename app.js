@@ -3,6 +3,8 @@ require("express-async-errors");
 const fileupload = require("express-fileupload");
 const connectDB = require("./db/connectDB");
 const insectRoutes = require("./routes/insectRoutes");
+const notFound = require("./middlewares/notfound");
+const errorHandler = require("./middlewares/errorhandler");
 const cloudinary = require("cloudinary").v2;
 
 cloudinary.config({
@@ -20,6 +22,9 @@ app.get("/", (req, res) => {
   res.send("insect AI");
   res.end();
 });
+
+app.use(notFound);
+app.use(errorHandler);
 
 const port = 5000;
 const start = async () => {
